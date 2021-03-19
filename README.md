@@ -1,4 +1,4 @@
-# es.jacksparrot.utils unity package
+# es.jacksparrot.scriptableutils unity package
 
 ## Installation using the Unity Package Manager (Unity 2019.3+)
 1. Open the Package Manager Window. 
