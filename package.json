@@ -1,5 +1,5 @@
 {
-  "name": "es.jacksparrot.scriptableutils",
+  "name": "es.jacksparrot.utilsso",
   "version": "1.0.0",
   "displayName": "jacksparrot Utils with scriptable objects",
   "description": "Utility tools such as updater, deterministic random, time utils and scene management",

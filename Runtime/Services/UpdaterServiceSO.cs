@@ -53,6 +53,7 @@ namespace JackSParrot.Utils
                 _updater.OnUpdate -= InternalUpdate;
                 Destroy(_updater.gameObject);
                 _updater = null;
+                Debug.Log("Updater:Dispose");
             }
             _registeredCallbacks.Clear();
             _callbacksToRegister.Clear();

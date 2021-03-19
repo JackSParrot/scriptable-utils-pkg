@@ -25,7 +25,7 @@ namespace JackSParrot.Utils
 
         public void AddListener<T>(Action<T> listener) where T : class
         {
-            var evListener = new Listener { EventType = typeof(T), EventDelegate = listener };
+            Listener evListener = new Listener { EventType = typeof(T), EventDelegate = listener };
             if (_processing)
             {
                 _listenersToAdd.Add(evListener);
@@ -38,7 +38,7 @@ namespace JackSParrot.Utils
 
         public void RemoveListener<T>(Action<T> listener) where T : class
         {
-            var evListener = new Listener { EventType = typeof(T), EventDelegate = listener };
+            Listener evListener = new Listener { EventType = typeof(T), EventDelegate = listener };
             if (_processing)
             {
                 _listenersToRemove.Add(evListener);
@@ -80,13 +80,13 @@ namespace JackSParrot.Utils
             }
             _processing = false;
 
-            foreach (var listenerToAdd in _listenersToAdd)
+            foreach (Listener listenerToAdd in _listenersToAdd)
             {
                 AddListenerInternal(listenerToAdd);
             }
             _listenersToAdd.Clear();
 
-            foreach (var listenerToRemove in _listenersToRemove)
+            foreach (Listener listenerToRemove in _listenersToRemove)
             {
                 RemoveListenerInternal(listenerToRemove);
             }

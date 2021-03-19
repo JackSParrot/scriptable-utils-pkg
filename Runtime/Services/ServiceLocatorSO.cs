@@ -13,6 +13,7 @@ namespace JackSParrot.Utils
     public class ServiceLocatorSO : ScriptableObject
     {
         [SerializeField] private List<ServicesList> _globalServices = new List<ServicesList>();
+        
         private readonly Dictionary<Type, IDisposable> _services = new Dictionary<Type, IDisposable>();
         private bool _initialized = false;
 
@@ -29,7 +30,7 @@ namespace JackSParrot.Utils
             }
             foreach(ServicesList servicesList in _globalServices)
             {
-                bool isValidEditor = (servicesList.IsEditor && Application.isEditor) || (!servicesList.IsEditor && !Application.isEditor);
+                bool isValidEditor = (servicesList.IsEditor && Application.isEditor) || (servicesList.IsRuntime && !Application.isEditor);
                 if(!isValidEditor)
                 {
                     continue;
@@ -110,7 +111,7 @@ namespace JackSParrot.Utils
         {
             foreach (KeyValuePair<Type, IDisposable> service in _services)
             {
-                service.Value.Dispose();
+                service.Value?.Dispose();
             }
             _services.Clear();
         }

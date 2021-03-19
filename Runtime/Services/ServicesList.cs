@@ -6,6 +6,8 @@ namespace JackSParrot.Utils
     public class ServicesList : ListSO<Service>
     {
         public bool IsEditor = false;
+        public bool IsRuntime = false;
+        
         public bool IsIos = false;
         public bool IsAndroid = false;
         public bool IsWindows = false;
