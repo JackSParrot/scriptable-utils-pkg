@@ -6,6 +6,7 @@ namespace JackSParrot.Utils
     public class UnityLoggerServiceSO : CustomLoggerServiceSO
     {
         [SerializeField] private LogLevel _defaultLevel = LogLevel.Debug;
+        
         private LogLevel _logLevel = LogLevel.Debug;
 
         public static UnityLoggerServiceSO CreateInstance(LogLevel level = LogLevel.Debug)

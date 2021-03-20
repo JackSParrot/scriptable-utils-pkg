@@ -51,5 +51,10 @@ namespace JackSParrot.Utils
         {
             Init(_seed);
         }
+
+        private void OnDisable()
+        {
+            Init(_seed);
+        }
     }
 }

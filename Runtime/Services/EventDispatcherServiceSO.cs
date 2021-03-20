@@ -105,6 +105,11 @@ namespace JackSParrot.Utils
             _listenersToRemove.Clear();
         }
 
+        private void OnDisable()
+        {
+            Clear();
+        }
+
         #region Internals
         private void AddListenerInternal(Listener listener)
         {

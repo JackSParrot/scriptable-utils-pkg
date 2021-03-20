@@ -6,7 +6,8 @@ namespace JackSParrot.Utils
     [CreateAssetMenu(fileName = "New TimeService", menuName = "JackSParrot/Services/TimeService", order = 1)]
     public class TimeServiceSO : Service
     {
-        private DateTime _epoch = new DateTime(1970, 1, 1);
+        private static DateTime _epoch = new DateTime(1970, 1, 1);
+        
         private float _lastSeconds = 0f;
         private DateTime _lastDate;
 
@@ -63,6 +64,12 @@ namespace JackSParrot.Utils
         }
 
         private void OnEnable()
+        {
+            _lastSeconds = Time.time;
+            _lastDate = DateTime.Now;
+        }
+
+        private void OnDisable()
         {
             _lastSeconds = Time.time;
             _lastDate = DateTime.Now;

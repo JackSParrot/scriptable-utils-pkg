@@ -57,7 +57,15 @@ namespace JackSParrot.Utils
 			_persistentScene = _scenes[sceneName];
 		}
 
-		public void TransitionToScene(string toSceneName, Action callback = null)
+		public void TransitionToScene(string toSceneName)
+		{
+			UnloadScene(ActiveScene.name, () =>
+			{
+				LoadScene(toSceneName, true, true, null);
+			});
+		}
+
+		public void TransitionToScene(string toSceneName, Action callback)
 		{
 			UnloadScene(ActiveScene.name, () =>
 			{
@@ -65,7 +73,17 @@ namespace JackSParrot.Utils
 			});
 		}
 
-		public void LoadScene(string sceneName, bool additive = false, bool setActive = true, Action callback = null)
+		public void LoadScene(string sceneName)
+		{
+			_coroutineRunner.StartCoroutine(this, LoadSceneCoroutine(sceneName, false, true, null));
+		}
+
+		public void LoadSceneAdditive(string sceneName)
+		{
+			_coroutineRunner.StartCoroutine(this, LoadSceneCoroutine(sceneName, true, true, null));
+		}
+
+		public void LoadScene(string sceneName, bool additive, bool setActive = true, Action callback = null)
 		{
 			if (_scenes.ContainsKey(sceneName))
 			{
@@ -91,6 +109,11 @@ namespace JackSParrot.Utils
 				return;
 			}
 			_coroutineRunner.StartCoroutine(this, UnloadSceneCoroutine(sceneName, callback));
+		}
+
+		public override void Dispose()
+		{
+			Clear();
 		}
 
 		private IEnumerator UnloadSceneCoroutine(string sceneName, Action callback)
@@ -163,6 +186,17 @@ namespace JackSParrot.Utils
 			}
 			callback?.Invoke();
 			_eventDispatcher.Raise(new SceneActivatedEvent { SceneName = sceneName });
+		}
+
+		private void Clear()
+		{
+			_scenes.Clear();
+			_persistentScene = default;
+		}
+
+		private void OnDisable()
+		{
+			Clear();
 		}
 	}
 }
