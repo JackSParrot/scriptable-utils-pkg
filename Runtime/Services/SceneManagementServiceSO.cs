@@ -137,7 +137,7 @@ namespace JackSParrot.Utils
 		    Scene previousScene = ActiveScene;
 			var previousSceneObjects = previousScene.GetRootGameObjects();
 			var handler = SceneManager.LoadSceneAsync(sceneName, additive ? LoadSceneMode.Additive : LoadSceneMode.Single);
-			handler.allowSceneActivation = setActive;
+			handler.allowSceneActivation = true;
 			while (!handler.isDone)
 			{
 				yield return null;
