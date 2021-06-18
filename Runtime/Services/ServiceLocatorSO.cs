@@ -6,7 +6,11 @@ namespace JackSParrot.Utils
 {
     public abstract class Service : ScriptableObject, IDisposable 
     {
-        public virtual void Dispose() { }
+        public virtual void Dispose() { Reset(); }
+
+        protected virtual void Reset()
+        {
+        }
     }
 
     [CreateAssetMenu(fileName = "New ServiceLocator", menuName = "JackSParrot/Services/ServiceLocator", order = 0)]
